@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<!--
+Developers:
+    Khalid Sultan
+    Gemmechu Mohammed
+    Doni Abeje
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Solar Energy Predictor - Using Machine and Deep Learning</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Solar Energy"/>
+    <meta name="keywords" content="Machine Learning, Deep Learning, Solar Energy Prediction, Climate Change"/>
+    <meta name="author" content="Khalid Sultan, Gemmechu Mohammed, Doni Abeje"/>
+
+    <!-- Bootstrap  -->
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'app/css/bootstrap.css') }}">
+    <!-- Owl Carousel  -->
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'app/css/owl.carousel.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'app/css/owl.theme.default.min.css') }}">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'app/css/animate.css') }}">
+    <!-- Odometer Theme -->
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'app/css/odometer-theme-plaza.css') }}">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+          integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <!-- Theme style  -->
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'app/css/style.css') }}">
+</head>
+<body>
+
+
+<div id="page-wrap">
+
+
+    <!-- ==========================================================================================================
+                                                       HERO
+         ========================================================================================================== -->
+
+    <div id="fh5co-hero-wrapper">
+        <nav class="container navbar navbar-expand-lg main-navbar-nav navbar-light">
+            <a class="navbar-brand" href="">Solar Energy</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav nav-items-center ml-auto mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="$('#timeline').goTo();return false;">Timeline</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="$('#download').goTo();return false;">Download</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="$('#about').goTo();return false;">About</a>
+                    </li>
+                </ul>
+                <div class="social-icons-header">
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container fh5co-hero-inner">
+            <h1 class="animated fadeIn wow" data-wow-delay="0.4s">A Solar Energy Predictor using Machine and Deep
+                Learning</h1>
+            <p class="animated font-weight-bold h3 fadeIn wow" data-wow-delay="0.67s">Calculates a possible solar energy
+                based on weather
+                data collected at your current location </p>
+            <h3>Parameters</h3>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-8">
+                        <form>
+                            <div class="form-row">
+                                <div class="col-6">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text"><i class="fas fa-cloud"></i></div>
+                                        </div>
+                                        <input type="text" id="cloudCoverage" name="cloudCoverage"
+                                               placeholder="Enter Cloud Coverage (%)" class="form-control"/>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text"><i class="fas fa-eye-slash"></i></div>
+                                        </div>
+                                        <input type="text" id="visibility" name="visibility"
+                                               placeholder="Enter Visibility (miles)"
+                                               class="form-control"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div class="form-row">
+                                <div class="col-6">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text"><i class="fas fa-stream"></i></div>
+                                        </div>
+                                        <input type="text" id="relativeHumidity" name="relativeHumidity"
+                                               placeholder="Enter Relative Humidity (%)" class="form-control"/>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text"><i class="fas fa-tachometer-alt"></i></div>
+                                        </div>
+                                        <input type="text" id="windSpeed" name="windSpeed"
+                                               placeholder="Enter Wind Speed (Mph)"
+                                               class="form-control"/>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <br/>
+                            <div class="form-row">
+                                <div class="col-6">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text"><i class="fas fa-thermometer-half"></i></div>
+                                        </div>
+                                        <input type="text" id="temperature" name="temperature"
+                                               placeholder="Enter Temperature (◦C)"
+                                               class="form-control"/>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text"><i class="fas fa-tint"></i></div>
+                                        </div>
+                                        <input type="text" id="dewPoint" name="dewPoint"
+                                               placeholder="Enter Dew Point (◦C)"
+                                               class="form-control"/>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <br/>
+                            <div class="form-row">
+                                <div class="col-6">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text"><i class="fas fa-mercury"></i></div>
+                                        </div>
+                                        <input type="text" id="stationPressure" name="stationPressure"
+                                               placeholder="Enter Station Pressure (inchHg)" class="form-control"/>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text"><i class="fas fa-weight"></i></div>
+                                        </div>
+                                        <input type="text" id="altimeter" name="altimeter"
+                                               placeholder="Enter Altimeter (inchHg)"
+                                               class="form-control"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-4">
+                        <h1 class="odometer h-100 w-75"
+                            style="padding-top: 23%; text-align: center;font-weight: 500; font-size: 40pt;">0</h1>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <a href="#" id="fill">
+                <button class="btn btn-md download-btn-first wow fadeInLeft animated" data-wow-delay="0.85s">Fill Data
+                    From Current Location
+                </button>
+            </a>
+            &nbsp;&nbsp;&nbsp;
+            <a href="#" id="generate_now">
+                <button class="btn btn-md download-btn-first wow fadeInLeft animated" data-wow-delay="0.85s">Generate
+                </button>
+            </a>
+            &nbsp;&nbsp;&nbsp;
+            <a href="#" id="compare">
+                <button class="btn btn-md download-btn-first wow fadeInLeft animated" data-wow-delay="0.85s">Compare
+                    with the World
+                </button>
+            </a>
+            <img style="right: -275px" class="fh5co-hero-smartphone animated fadeInRight wow" data-wow-delay="1s"
+                 src="../static/app/img/phone-image.png" alt="Smartphone">
+        </div>
+
+
+    </div> <!-- first section wrapper -->
+
+
+    <!-- ==========================================================================================================
+                                            WORLDWIDE SECTION
+         ========================================================================================================== -->
+
+    <div id="fh5co-reviews" class="fh5co-reviews-outer pb-0">
+        <h1>Current Solar Energy Accumulated at Capital Cities of the World.</h1>
+        <div class="mt-0" style="height: 400px">
+            <div class="row justify-content-center" style="height: 400px">
+                <!-- Create a div where the graph will take place -->
+                <div class="col-lg-12 wow">
+                    <div id="my_dataviz"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- ==========================================================================================================
+                                                 DOWNLOADS SECTION
+    ========================================================================================================== -->
+
+    <div id="fh5co-download" class="fh5co-bottom-outer">
+        <div class="overlay">
+            <div class="container fh5co-bottom-inner">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h1>Download</h1>
+                        <p>Download our mobile app for more in depth use of our system.</p>
+                        <a class="wow fadeIn animated" data-wow-delay="0.67s" href="#"><img class="google-play-btn"
+                                                                                            src="../static/app/img/google-play-icon.png"
+                                                                                            alt="Google Play Icon"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ==========================================================================================================
+                                               ABOUT SECTION
+    ========================================================================================================== -->
+
+    <footer class="footer-outer">
+        <div class="container footer-inner">
+
+            <div class="footer-three-grid wow fadeIn animated" data-wow-delay="0.66s">
+                <div class="column-1-3">
+                    <h1>Solar Energy</h1>
+                </div>
+                <div class="column-2-3">
+                    <nav class="footer-nav">
+                        <ul>
+                            <a href="#" onclick="$('#fh5co-hero-wrapper').goTo();return false;">
+                                <li>Home</li>
+                            </a>
+                            <a href="#" onclick="$('#timeline').goTo();return false;">
+                                <li>Common Cities</li>
+                            </a>
+                            <a href="#" onclick="$('#download').goTo();return false;">
+                                <li>Download</li>
+                            </a>
+                            <a href="#" onclick="$('#about').goTo();return false;">
+                                <li class="active">About</li>
+                            </a>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="column-3-3">
+                    <div class="social-icons-footer">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <span class="border-bottom-footer"></span>
+
+            <p class="copyright">&copy; 2019 Solar Energy Predictor. All rights reserved. Designed for AI for Climate
+                Change Competition.</p>
+
+        </div>
+    </footer>
+
+
+</div> <!-- main page wrapper -->
+
+<script src="{{ url_for('static', filename = 'app/js/jquery.min.js') }}"></script>
+<script src="{{ url_for('static', filename = 'app/js/bootstrap.js') }}"></script>
+<script src="{{ url_for('static', filename = 'app/js/owl.carousel.js') }}"></script>
+<script src="{{ url_for('static', filename = 'app/js/wow.min.js') }}"></script>
+<script src="{{ url_for('static', filename = 'app/js/d3.v4.js') }}"></script>
+<script src="{{ url_for('static', filename = 'app/js/odometer.min.js') }}"></script>
+<script src="{{ url_for('static', filename = 'app/js/main.js') }}"></script>
+
+<script>
+    $(function () {
+        $('a#fill').bind('click', function () {
+            $.getJSON('/fillCurrentLocationWeather',
+                function (data) {
+                    document.getElementById('cloudCoverage').value = data['currently']['cloudCover'];
+                    document.getElementById('visibility').value = data['currently']['visibility'];
+                    document.getElementById('relativeHumidity').value = data['currently']['humidity'];
+                    document.getElementById('windSpeed').value = data['currently']['windSpeed'];
+                    document.getElementById('temperature').value = data['currently']['temperature'];
+                    document.getElementById('dewPoint').value = data['currently']['dewPoint'];
+                    document.getElementById('stationPressure').value = data['currently']['pressure'];
+                    document.getElementById('altimeter').value = data['currently']['pressure'];
+                });
+            return false;
+        });
+        $('a#generate_now').bind('click', function () {
+            let data = {
+                cloudCoverage: $("#cloudCoverage").val(),
+                visibility: $("#visibility").val(),
+                relativeHumidity: $("#relativeHumidity").val(),
+                windSpeed: $("#windSpeed").val(),
+                temperature: $("#temperature").val(),
+                dewPoint: $("#dewPoint").val(),
+                stationPressure: $("#stationPressure").val(),
+                altimeter: $("#altimeter").val()
+            };
+            $.post("/generate", JSON.stringify(data), function (response) {
+                $('.odometer').html(response['value'])
+            });
+            return false;
+        });
+        $('a#compare').bind('click', function () {
+            $.getJSON('/generateTimeline',
+                function (data) {
+                    // set the dimensions and margins of the graph
+                    var margin = {top: 10, right: 30, bottom: 40, left: 100},
+                        width = document.getElementById("my_dataviz").parentElement.clientWidth - margin.left - margin.right,
+                        height = document.getElementById("my_dataviz").parentElement.clientHeight - margin.top - margin.bottom;
+
+                    // append the svg object to the body of the page
+                    var svg = d3.select("#my_dataviz")
+                        .append("svg")
+                        .attr("width", width + margin.left + margin.right)
+                        .attr("height", height + margin.top + margin.bottom)
+                        .append("g")
+                        .attr("transform",
+                            "translate(" + margin.left + "," + margin.top + ")");
+
+                    // Parse the Data
+                    d3.json(data, function (data) {
+
+                        // sort data
+                        data.sort(function (b, a) {
+                            return a.Value - b.Value;
+                        });
+
+                        // Add X axis
+                        var x = d3.scaleLinear()
+                            .domain([0, 13000])
+                            .range([0, width]);
+                        svg.append("g")
+                            .attr("transform", "translate(0," + height + ")")
+                            .call(d3.axisBottom(x))
+                            .selectAll("text")
+                            .attr("transform", "translate(-10,0)rotate(-45)")
+                            .style("text-anchor", "end");
+
+                        // Y axis
+                        var y = d3.scaleBand()
+                            .range([0, height])
+                            .domain(data.map(function (d) {
+                                return d.Country;
+                            }))
+                            .padding(1);
+                        svg.append("g")
+                            .call(d3.axisLeft(y))
+
+                        // Lines
+                        svg.selectAll("myline")
+                            .data(data)
+                            .enter()
+                            .append("line")
+                            .attr("x1", x(0))
+                            .attr("x2", x(0))
+                            .attr("y1", function (d) {
+                                return y(d.Country);
+                            })
+                            .attr("y2", function (d) {
+                                return y(d.Country);
+                            })
+                            .attr("stroke", "grey")
+
+                        // Circles -> start at X=0
+                        svg.selectAll("mycircle")
+                            .data(data)
+                            .enter()
+                            .append("circle")
+                            .attr("cx", x(0))
+                            .attr("cy", function (d) {
+                                return y(d.Country);
+                            })
+                            .attr("r", "7")
+                            .style("fill", "#69b3a2")
+                            .attr("stroke", "black")
+
+                        // Change the X coordinates of line and circle
+                        svg.selectAll("circle")
+                            .transition()
+                            .duration(2000)
+                            .attr("cx", function (d) {
+                                return x(d.Value);
+                            })
+
+                        svg.selectAll("line")
+                            .transition()
+                            .duration(2000)
+                            .attr("x1", function (d) {
+                                return x(d.Value);
+                            })
+
+                    })
+
+                });
+            return false;
+        });
+
+    });
+</script>
+<!--Graphing Script-->
+<script>
+    // set the dimensions and margins of the graph
+    var margin = {top: 10, right: 30, bottom: 40, left: 100},
+        width = document.getElementById("my_dataviz").parentElement.clientWidth - margin.left - margin.right,
+        height = document.getElementById("my_dataviz").parentElement.clientHeight - margin.top - margin.bottom;
+
+    // append the svg object to the body of the page
+    var svg = d3.select("#my_dataviz")
+        .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform",
+            "translate(" + margin.left + "," + margin.top + ")");
+
+    // Parse the Data
+    d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/7_OneCatOneNum_header.csv", function (data) {
+
+        // sort data
+        data.sort(function (b, a) {
+            return a.Value - b.Value;
+        });
+
+        // Add X axis
+        var x = d3.scaleLinear()
+            .domain([0, 13000])
+            .range([0, width]);
+        svg.append("g")
+            .attr("transform", "translate(0," + height + ")")
+            .call(d3.axisBottom(x))
+            .selectAll("text")
+            .attr("transform", "translate(-10,0)rotate(-45)")
+            .style("text-anchor", "end");
+
+        // Y axis
+        var y = d3.scaleBand()
+            .range([0, height])
+            .domain(data.map(function (d) {
+                return d.Country;
+            }))
+            .padding(1);
+        svg.append("g")
+            .call(d3.axisLeft(y))
+
+        // Lines
+        svg.selectAll("myline")
+            .data(data)
+            .enter()
+            .append("line")
+            .attr("x1", x(0))
+            .attr("x2", x(0))
+            .attr("y1", function (d) {
+                return y(d.Country);
+            })
+            .attr("y2", function (d) {
+                return y(d.Country);
+            })
+            .attr("stroke", "grey")
+
+        // Circles -> start at X=0
+        svg.selectAll("mycircle")
+            .data(data)
+            .enter()
+            .append("circle")
+            .attr("cx", x(0))
+            .attr("cy", function (d) {
+                return y(d.Country);
+            })
+            .attr("r", "7")
+            .style("fill", "#69b3a2")
+            .attr("stroke", "black")
+
+        // Change the X coordinates of line and circle
+        svg.selectAll("circle")
+            .transition()
+            .duration(2000)
+            .attr("cx", function (d) {
+                return x(d.Value);
+            })
+
+        svg.selectAll("line")
+            .transition()
+            .duration(2000)
+            .attr("x1", function (d) {
+                return x(d.Value);
+            })
+
+    })
+
+</script>
+/body>
+< /html>

@@ -1,0 +1,417 @@
+[
+    {
+        "timezones": [
+            "Asia/Kabul"
+        ], 
+        "latlng": [
+            33, 
+            65
+        ], 
+        "name": "Afghanistan", 
+        "country_code": "AF", 
+        "capital": "Kabul"
+    }, 
+    {
+        "timezones": [
+            "Asia/Dubai"
+        ], 
+        "latlng": [
+            24, 
+            54
+        ], 
+        "name": "United Arab Emirates", 
+        "country_code": "AE", 
+        "capital": "Abu Dhabi"
+    }, 
+    {
+        "timezones": [
+            "America/Argentina/Buenos_Aires", 
+            "America/Argentina/Cordoba", 
+            "America/Argentina/Salta", 
+            "America/Argentina/Jujuy", 
+            "America/Argentina/Tucuman", 
+            "America/Argentina/Catamarca", 
+            "America/Argentina/La_Rioja", 
+            "America/Argentina/San_Juan", 
+            "America/Argentina/Mendoza", 
+            "America/Argentina/San_Luis", 
+            "America/Argentina/Rio_Gallegos", 
+            "America/Argentina/Ushuaia"
+        ], 
+        "latlng": [
+            -34, 
+            -64
+        ], 
+        "name": "Argentina", 
+        "country_code": "AR", 
+        "capital": "Buenos Aires"
+    },
+    {
+        "timezones": [
+            "Australia/Lord_Howe", 
+            "Antarctica/Macquarie", 
+            "Australia/Hobart", 
+            "Australia/Currie", 
+            "Australia/Melbourne", 
+            "Australia/Sydney", 
+            "Australia/Broken_Hill", 
+            "Australia/Brisbane", 
+            "Australia/Lindeman", 
+            "Australia/Adelaide", 
+            "Australia/Darwin", 
+            "Australia/Perth", 
+            "Australia/Eucla"
+        ], 
+        "latlng": [
+            -27, 
+            133
+        ], 
+        "name": "Australia", 
+        "country_code": "AU", 
+        "capital": "Canberra"
+    }, 
+    {
+        "timezones": [
+            "America/Noronha", 
+            "America/Belem", 
+            "America/Fortaleza", 
+            "America/Recife", 
+            "America/Araguaina", 
+            "America/Maceio", 
+            "America/Bahia", 
+            "America/Sao_Paulo", 
+            "America/Campo_Grande", 
+            "America/Cuiaba", 
+            "America/Santarem", 
+            "America/Porto_Velho", 
+            "America/Boa_Vista", 
+            "America/Manaus", 
+            "America/Eirunepe", 
+            "America/Rio_Branco"
+        ], 
+        "latlng": [
+            -10, 
+            -55
+        ], 
+        "name": "Brazil", 
+        "country_code": "BR", 
+        "capital": "Bras\u00edlia"
+    }, 
+    {
+        "timezones": [
+            "Europe/Berlin", 
+            "Europe/Busingen"
+        ], 
+        "latlng": [
+            51, 
+            9
+        ], 
+        "name": "Germany", 
+        "country_code": "DE", 
+        "capital": "Berlin"
+    }, 
+    {
+        "timezones": [
+            "Africa/Addis_Ababa"
+        ], 
+        "latlng": [
+            8, 
+            38
+        ], 
+        "name": "Ethiopia", 
+        "country_code": "ET", 
+        "capital": "Addis Ababa"
+    }, 
+    {
+        "timezones": [
+            "Europe/Paris"
+        ], 
+        "latlng": [
+            46, 
+            2
+        ], 
+        "name": "France", 
+        "country_code": "FR", 
+        "capital": "Paris"
+    }, 
+    {
+        "timezones": [
+            "Europe/London"
+        ], 
+        "latlng": [
+            54, 
+            -2
+        ], 
+        "name": "United Kingdom", 
+        "country_code": "GB", 
+        "capital": "London"
+    }, 
+    {
+        "timezones": [
+            "Asia/Kolkata"
+        ], 
+        "latlng": [
+            20, 
+            77
+        ], 
+        "name": "India", 
+        "country_code": "IN", 
+        "capital": "New Delhi"
+    }, 
+    {
+        "timezones": [
+            "Europe/Rome"
+        ], 
+        "latlng": [
+            42.83333333, 
+            12.83333333
+        ], 
+        "name": "Italy", 
+        "country_code": "IT", 
+        "capital": "Rome"
+    }, 
+    {
+        "timezones": [
+            "Asia/Tokyo"
+        ], 
+        "latlng": [
+            36, 
+            138
+        ], 
+        "name": "Japan", 
+        "country_code": "JP", 
+        "capital": "Tokyo"
+    }, 
+    {
+        "timezones": [
+            "America/Mexico_City", 
+            "America/Cancun", 
+            "America/Merida", 
+            "America/Monterrey", 
+            "America/Matamoros", 
+            "America/Mazatlan", 
+            "America/Chihuahua", 
+            "America/Ojinaga", 
+            "America/Hermosillo", 
+            "America/Tijuana", 
+            "America/Bahia_Banderas"
+        ], 
+        "latlng": [
+            23, 
+            -102
+        ], 
+        "name": "Mexico", 
+        "country_code": "MX", 
+        "capital": "Mexico City"
+    }, 
+    {
+        "timezones": [
+            "Asia/Kuala_Lumpur", 
+            "Asia/Kuching"
+        ], 
+        "latlng": [
+            2.5, 
+            112.5
+        ], 
+        "name": "Malaysia", 
+        "country_code": "MY", 
+        "capital": "Kuala Lumpur"
+    }, 
+    {
+        "timezones": [
+            "America/Puerto_Rico"
+        ], 
+        "latlng": [
+            18.25, 
+            -66.5
+        ], 
+        "name": "Puerto Rico", 
+        "country_code": "PR", 
+        "capital": "San Juan"
+    }, 
+    {
+        "timezones": [
+            "Asia/Qatar"
+        ], 
+        "latlng": [
+            25.5, 
+            51.25
+        ], 
+        "name": "Qatar", 
+        "country_code": "QA", 
+        "capital": "Doha"
+    }, 
+    {
+        "timezones": [
+            "Europe/Kaliningrad", 
+            "Europe/Moscow", 
+            "Europe/Simferopol", 
+            "Europe/Volgograd", 
+            "Europe/Kirov", 
+            "Europe/Astrakhan", 
+            "Europe/Samara", 
+            "Europe/Ulyanovsk", 
+            "Asia/Yekaterinburg", 
+            "Asia/Omsk", 
+            "Asia/Novosibirsk", 
+            "Asia/Barnaul", 
+            "Asia/Tomsk", 
+            "Asia/Novokuznetsk", 
+            "Asia/Krasnoyarsk", 
+            "Asia/Irkutsk", 
+            "Asia/Chita", 
+            "Asia/Yakutsk", 
+            "Asia/Khandyga", 
+            "Asia/Vladivostok", 
+            "Asia/Ust-Nera", 
+            "Asia/Magadan", 
+            "Asia/Sakhalin", 
+            "Asia/Srednekolymsk", 
+            "Asia/Kamchatka", 
+            "Asia/Anadyr"
+        ], 
+        "latlng": [
+            60, 
+            100
+        ], 
+        "name": "Russia", 
+        "country_code": "RU", 
+        "capital": "Moscow"
+    },
+    {
+        "timezones": [
+            "Asia/Riyadh"
+        ], 
+        "latlng": [
+            25, 
+            45
+        ], 
+        "name": "Saudi Arabia", 
+        "country_code": "SA", 
+        "capital": "Riyadh"
+    }, 
+    {
+        "timezones": [
+            "Africa/Khartoum"
+        ], 
+        "latlng": [
+            15, 
+            30
+        ], 
+        "name": "Sudan", 
+        "country_code": "SD", 
+        "capital": "Khartoum"
+    }, 
+    {
+        "timezones": [
+            "Africa/Dakar"
+        ], 
+        "latlng": [
+            14, 
+            -14
+        ], 
+        "name": "Senegal", 
+        "country_code": "SN", 
+        "capital": "Dakar"
+    }, 
+    {
+        "timezones": [
+            "Asia/Singapore"
+        ], 
+        "latlng": [
+            1.36666666, 
+            103.8
+        ], 
+        "name": "Singapore", 
+        "country_code": "SG", 
+        "capital": "Singapore"
+    },
+    {
+        "timezones": [
+            "Africa/Mogadishu"
+        ], 
+        "latlng": [
+            10, 
+            49
+        ], 
+        "name": "Somalia", 
+        "country_code": "SO", 
+        "capital": "Mogadishu"
+    },
+    {
+        "timezones": [
+            "Asia/Bangkok"
+        ], 
+        "latlng": [
+            15, 
+            100
+        ], 
+        "name": "Thailand", 
+        "country_code": "TH", 
+        "capital": "Bangkok"
+    },
+    {
+        "timezones": [
+            "Europe/Istanbul"
+        ], 
+        "latlng": [
+            39, 
+            35
+        ], 
+        "name": "Turkey", 
+        "country_code": "TR", 
+        "capital": "Ankara"
+    },
+    {
+        "timezones": [
+            "America/New_York", 
+            "America/Detroit", 
+            "America/Kentucky/Louisville", 
+            "America/Kentucky/Monticello", 
+            "America/Indiana/Indianapolis", 
+            "America/Indiana/Vincennes", 
+            "America/Indiana/Winamac", 
+            "America/Indiana/Marengo", 
+            "America/Indiana/Petersburg", 
+            "America/Indiana/Vevay", 
+            "America/Chicago", 
+            "America/Indiana/Tell_City", 
+            "America/Indiana/Knox", 
+            "America/Menominee", 
+            "America/North_Dakota/Center", 
+            "America/North_Dakota/New_Salem", 
+            "America/North_Dakota/Beulah", 
+            "America/Denver", 
+            "America/Boise", 
+            "America/Phoenix", 
+            "America/Los_Angeles", 
+            "America/Anchorage", 
+            "America/Juneau", 
+            "America/Sitka", 
+            "America/Metlakatla", 
+            "America/Yakutat", 
+            "America/Nome", 
+            "America/Adak", 
+            "Pacific/Honolulu"
+        ], 
+        "latlng": [
+            38, 
+            -97
+        ], 
+        "name": "United States", 
+        "country_code": "US", 
+        "capital": "Washington D.C."
+    },
+    {
+        "timezones": [
+            "Africa/Johannesburg"
+        ], 
+        "latlng": [
+            -29, 
+            24
+        ], 
+        "name": "South Africa", 
+        "country_code": "ZA", 
+        "capital": "Pretoria"
+    }
+]
