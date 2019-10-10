@@ -8,6 +8,7 @@ import time
 import datetime
 import json
 
+import numpy as np
 import pandas as pd
 
 from keras.models import load_model
@@ -62,7 +63,6 @@ def generate_timeline():
         keys = ['cloudCover', 'visibility', 'humidity', 'windSpeed',
                 'temperature', 'dewPoint', 'pressure', 'pressure']
         variables = weather['currently']
-        print(variables)
         if not check_if_all_data_is_available(variables, keys):
             print('Skipped Country {} with Latitude {} and Longitude {}'.format(i, countries[i][0], countries[i][1]))
             continue
@@ -87,7 +87,6 @@ def generate_timeline():
         clean_values = pd.DataFrame(given_values)
         clean_values = clean_values.astype('float32')
         print("Loaded weather data for City {}".format(i))
-        print(clean_values)
         datas.append(clean_values)
     df = pd.concat(datas)
     results = {}
@@ -98,8 +97,16 @@ def generate_timeline():
     for i in predictions[0]:
         print('Predicted Solar Energy for Country {}/{}'.format(counter, predictions.shape[0]))
         counter += 1
-        results[countries.keys()[predictions.index(i)]] = ['{}'.format(i)]
+        savant = 0
+        key = ""
+        for j in countries.keys():
+            if counter == savant:
+                key = j
+                break
+            savant += 1
+        results[key] = '{}'.format(i)
     pred_df = pd.DataFrame(results, columns=['Country', 'Value'])
+    pred_df = pred_df.astype('float32')
     export = pred_df.to_json(orient='split')
     return jsonify(export)
 
