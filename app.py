@@ -14,6 +14,7 @@ import pandas as pd
 from keras.models import load_model
 
 app = Flask(__name__)
+api_key = "0113592eb98c0feeefac0af2898f1c5f"
 
 
 @app.route('/')
@@ -93,10 +94,8 @@ def generate_timeline():
     model = get_model()
     predictions = model.predict(df)
     counter = 0
-    print(predictions.shape)
-    for i in predictions[0]:
-        print('Predicted Solar Energy for Country {}/{}'.format(counter, predictions.shape[0]))
-        counter += 1
+    for i in predictions[0:]:
+        print('Predicted Solar Energy for Country {}/{}'.format(counter+1, predictions.shape[0]))
         savant = 0
         key = ""
         for j in countries.keys():
@@ -104,24 +103,26 @@ def generate_timeline():
                 key = j
                 break
             savant += 1
-        results[key] = '{}'.format(i)
-    pred_df = pd.DataFrame(results, columns=['Country', 'Value'])
-    pred_df = pred_df.astype('float32')
-    export = pred_df.to_json(orient='split')
-    return jsonify(export)
+        counter += 1
+        results[key] = '{}'.format(i[0])
+    json_results = []
+    for i in results.keys():
+        json_results_temp = {'Country': i, 'Value': results[i]}
+        json_results.append(json_results_temp)
+    return jsonify(json_results)
 
 
 @app.route("/fillCurrentLocationWeather")
 def get_current_location_weather_now():
     latitude, longitude = get_my_current_location()
-    url = 'https://api.darksky.net/forecast/7e5553d96e98639d454789b49d62e88d/{},{}'.format(latitude, longitude)
+    url = 'https://api.darksky.net/forecast/{}/{},{}'.format(api_key, latitude, longitude)
     r = requests.get(url)
     j = json.loads(r.text)
     return jsonify(j)
 
 
 def get_location_weather_now(latitude, longitude):
-    url = 'https://api.darksky.net/forecast/7e5553d96e98639d454789b49d62e88d/{},{}'.format(latitude, longitude)
+    url = 'https://api.darksky.net/forecast/{}/{},{}'.format(api_key, latitude, longitude)
     r = requests.get(url)
     j = json.loads(r.text)
     return j
