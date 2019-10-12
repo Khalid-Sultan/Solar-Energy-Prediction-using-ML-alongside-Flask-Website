@@ -297,13 +297,16 @@ Developers:
 <script src="{{ url_for('static', filename = 'app/js/wow.min.js') }}"></script>
 <script src="{{ url_for('static', filename = 'app/js/d3.v4.js') }}"></script>
 <script src="{{ url_for('static', filename = 'app/js/odometer.min.js') }}"></script>
+<script src="{{ url_for('static', filename = 'app/js/jquery.loading.min.js') }}"></script>
 <script src="{{ url_for('static', filename = 'app/js/main.js') }}"></script>
 
 <script>
     $(function () {
         $('a#fill').bind('click', function () {
+            $("body").loading();
             $.getJSON('/fillCurrentLocationWeather',
                 function (data) {
+                    $("body").loading('stop');
                     document.getElementById('cloudCoverage').value = data['currently']['cloudCover'];
                     document.getElementById('visibility').value = data['currently']['visibility'];
                     document.getElementById('relativeHumidity').value = data['currently']['humidity'];
@@ -316,6 +319,7 @@ Developers:
             return false;
         });
         $('a#generate_now').bind('click', function () {
+            $("body").loading();
             let data = {
                 cloudCoverage: $("#cloudCoverage").val(),
                 visibility: $("#visibility").val(),
@@ -326,14 +330,17 @@ Developers:
                 stationPressure: $("#stationPressure").val(),
                 altimeter: $("#altimeter").val()
             };
+            $("body").loading('stop');
             $.post("/generate", JSON.stringify(data), function (response) {
                 $('.odometer').html(response['value'])
             });
             return false;
         });
         $('a#compare').bind('click', function () {
+            $("body").loading();
             $.getJSON('/generateTimeline',
                 function (data) {
+                    $("body").loading('stop');
                     document.getElementById("my_dataviz").innerHTML = '';
                     // set the dimensions and margins of the graph
                     var margin = {top: 10, right: 30, bottom: 40, left: 100},
