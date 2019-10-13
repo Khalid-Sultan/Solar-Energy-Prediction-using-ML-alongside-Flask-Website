@@ -50,7 +50,7 @@ def generate():
     clean_values = clean_values.astype('float32')
     prediction = model.predict(clean_values)
     result = {
-        'value': '{}'.format(prediction[0][0])
+        'value': '{}'.format(round(float(prediction[0][0]), 1))
     }
     return jsonify(result)
 

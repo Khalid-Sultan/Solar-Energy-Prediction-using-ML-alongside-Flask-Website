@@ -20,43 +20,60 @@ def normalize_data(dataset, data_min, data_max):
 
 
 def import_data(train_dataframe, dev_dataframe, test_dataframe):
-    dataset = train_dataframe.values
-    dataset = dataset.astype('float32')
+    train_norm = (train_dataframe - train_dataframe.mean()) / (train_dataframe.max() - train_dataframe.min())
+    dev_norm = (dev_dataframe - dev_dataframe.mean()) / (dev_dataframe.max() - dev_dataframe.min())
+    test_norm = (test_dataframe - test_dataframe.mean()) / (test_dataframe.max() - test_dataframe.min())
+
+    train_dataset = train_norm.values.astype('float32')
+    dev_dataset = dev_norm.values.astype('float32')
+    test_dataset = test_norm.values.astype('float32')
+
+    train_data = train_dataset[:, 0:8]
+    train_labels = train_dataset[:, 8]
+    dev_data = dev_dataset[:, 0:8]
+    dev_labels = dev_dataset[:, 8]
+    test_data = test_dataset[:, 0:8]
+    test_labels = test_dataset[:, 8]
+
+    # dataset = train_dataframe.values
+    # dataset = dataset.astype('float32')
     # Include all 8 initial factors (Cloud Coverage ; Visibility ; Temperature ; Dew Point ; Relative Humidity ; Wind Speed ; Station Pressure ; Altimeter)
-    max_test = np.max(dataset[:, 8])
-    min_test = np.min(dataset[:, 8])
+    max_test = np.max(train_dataset[:, 8])
+    min_test = np.min(train_dataset[:, 8])
     scale_factor = max_test - min_test
-    max = np.empty(13)
-    min = np.empty(13)
+    # max = np.empty(9)
+    # min = np.empty(9)
 
-    # Create training dataset
-    for i in range(0, 10):
-        min[i] = np.amin(dataset[:, i], axis=0)
-        max[i] = np.amax(dataset[:, i], axis=0)
-        dataset[:, i] = normalize_data(dataset[:, i], min[i], max[i])
+    # for i in range(0, 9):
+    #     min[i] = np.amin(dataset[:, i], axis=0)
+    #     max[i] = np.amax(dataset[:, i], axis=0)
+    #
+    # # Create training dataset
+    # for i in range(0, 9):
+    #     dataset[:, i] = normalize_data(dataset[:, i], min[i], max[i])
 
-    train_data = dataset[:, 0:8]
-    train_labels = dataset[:, 8]
-
-    # Create dev dataset
-    dataset = dev_dataframe.values
-    dataset = dataset.astype('float32')
-
-    for i in range(0, 10):
-        dataset[:, i] = normalize_data(dataset[:, i], min[i], max[i])
-
-    dev_data = dataset[:, :8]
-    dev_labels = dataset[:, 8]
-
-    # Create test dataset
-    dataset = test_dataframe.values
-    dataset = dataset.astype('float32')
-
-    for i in range(0, 10):
-        dataset[:, i] = normalize_data(dataset[:, i], min[i], max[i])
-
-    test_data = dataset[:, 0:8]
-    test_labels = dataset[:, 8]
+    # train_data = dataset[:, 0:8]
+    # train_labels = dataset[:, 8]
+    #
+    # # Create dev dataset
+    # dataset = dev_dataframe.values
+    # dataset = dataset.astype('float32')
+    #
+    # for i in range(0, 8):
+    #     dataset[:, i] = normalize_data(dataset[:, i], min[i], max[i])
+    #
+    # dev_data = dataset[:, :8]
+    # dev_labels = dataset[:, 8]
+    #
+    # # Create test dataset
+    # dataset = test_dataframe.values
+    # dataset = dataset.astype('float32')
+    #
+    # for i in range(0, 8):
+    #     dataset[:, i] = normalize_data(dataset[:, i], min[i], max[i])
+    #
+    # test_data = dataset[:, 0:8]
+    # test_labels = dataset[:, 8]
 
     return train_data, train_labels, dev_data, dev_labels, test_data, test_labels, scale_factor
 
@@ -80,13 +97,9 @@ def main():
     test_dataframe = pd.read_csv('weather_test.csv', sep=";", engine='python', header=None)
 
     #Drop first column
-    train_dataframe.drop(train_dataframe.columns[0], axis=1)
-    dev_dataframe.drop(dev_dataframe.columns[0], axis=1)
-    test_dataframe.drop(test_dataframe.columns[0], axis=1)
-
-    print(train_dataframe.head(1))
-    print(dev_dataframe.head(1))
-    print(test_dataframe.head(1))
+    train_dataframe.drop(train_dataframe.columns[0], axis=1, inplace=True)
+    dev_dataframe.drop(dev_dataframe.columns[0], axis=1, inplace=True)
+    test_dataframe.drop(test_dataframe.columns[0], axis=1, inplace=True)
 
     train_data, train_labels, dev_data, dev_labels, test_data, test_labels, scale_factor = import_data(train_dataframe,
                                                                                                        dev_dataframe,
@@ -100,7 +113,7 @@ def main():
     Y_test = np.reshape(test_labels, (test_labels.shape[0] // time_steps, time_steps, 1))
 
     model = build_model(train_data)
-    history = model.fit(train_data, train_labels, epochs=500, batch_size=40, validation_split=0.2)
+    history = model.fit(train_data, train_labels, epochs=500, batch_size=60, validation_split=0.2)
     test_mse_score, test_mae_score = model.evaluate(dev_data, dev_labels, verbose=0)
     print('Average prediction you are off by is ', test_mae_score)
     # save model and architecture to single file
