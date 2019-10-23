@@ -190,6 +190,10 @@ Developers:
                 </button>
             </a>
             &nbsp;&nbsp;&nbsp;
+            <a href="#" id="weekly">
+                <button class="btn btn-md download-btn-first wow fadeInLeft animated" data-wow-delay="0.85s">Weekly
+                </button>
+            </a>
             <a href="#" id="compare">
                 <button class="btn btn-md download-btn-first wow fadeInLeft animated" data-wow-delay="0.85s">Compare
                     with the World
@@ -219,7 +223,17 @@ Developers:
 
         </div>
     </div>
-
+    <div id="fh5co-reviews2" class="fh5co-reviews2-outer pb-0">
+        <h1>This Week's Prediction Data</h1>
+        <div class="mt-0" style="height: 400px">
+            <div class="row justify-content-center" style="height: 400px">
+                <!-- Create a div where the graph will take place -->
+                <div class="col-lg-12 wow">
+                    <div id="my_dataviz2"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- ==========================================================================================================
                                                  DOWNLOADS SECTION
@@ -338,10 +352,11 @@ Developers:
         });
         $('a#compare').bind('click', function () {
             $("body").loading();
-            $.getJSON('/generateTimeline',
+            $.getJSON('/compare',
                 function (data) {
                     $("body").loading('stop');
                     document.getElementById("my_dataviz").innerHTML = '';
+
                     // set the dimensions and margins of the graph
                     var margin = {top: 10, right: 30, bottom: 40, left: 100},
                         width = document.getElementById("my_dataviz").parentElement.clientWidth - margin.left - margin.right,
@@ -355,18 +370,16 @@ Developers:
                         .append("g")
                         .attr("transform",
                             "translate(" + margin.left + "," + margin.top + ")");
-                    // Parse the Data
 
                     // sort data
-                    console.log(data);
                     data.sort(function (b, a) {
                         return a.Value - b.Value;
                     });
 
                     // Add X axis
                     var x = d3.scaleLinear()
-                        .domain([0, 15000])
-                        .range([0, width]);
+                        .domain([data[0].min - 50, data[0].max])
+                        .range([50, width]);
                     svg.append("g")
                         .attr("transform", "translate(0," + height + ")")
                         .call(d3.axisBottom(x))
@@ -397,7 +410,7 @@ Developers:
                         .attr("y2", function (d) {
                             return y(d.Country);
                         })
-                        .attr("stroke", "grey");
+                        .attr("stroke", "grey")
 
                     // Circles -> start at X=0
                     svg.selectAll("mycircle")
@@ -427,11 +440,97 @@ Developers:
                             return x(d.Value);
                         })
 
-
                 });
             return false;
         });
+        $('a#weekly').bind('click', function () {
+            $("body").loading();
+            $.getJSON('/generateTimeline',
+                function (data) {
+                    $("body").loading('stop');
+                    document.getElementById("my_dataviz2").innerHTML = '';
 
+                    // set the dimensions and margins of the graph
+                    var margin2 = {top: 10, right: 30, bottom: 40, left: 100},
+                        width2 = document.getElementById("my_dataviz2").parentElement.clientWidth - margin.left - margin.right,
+                        height2 = document.getElementById("my_dataviz2").parentElement.clientHeight - margin.top - margin.bottom;
+
+                    // append the svg object to the body of the page
+                    var svg2 = d3.select("#my_dataviz2")
+                        .append("svg")
+                        .attr("width", width2 + margin2.left + margin2.right)
+                        .attr("height", height2 + margin2.top + margin2.bottom)
+                        .append("g")
+                        .attr("transform",
+                            "translate(" + margin2.left + "," + margin2.top + ")");
+
+                    // Add X axis
+                    var x = d3.scaleLinear()
+                        .domain([data[0].min - 50, data[0].max])
+                        .range([50, width]);
+                    svg2.append("g")
+                        .attr("transform", "translate(0," + height + ")")
+                        .call(d3.axisBottom(x))
+                        .selectAll("text")
+                        .attr("transform", "translate(-10,0)rotate(-45)")
+                        .style("text-anchor", "end");
+
+                    // Y axis
+                    var y = d3.scaleBand()
+                        .range([0, height])
+                        .domain(data.map(function (d) {
+                            return d.date;
+                        }))
+                        .padding(1);
+                    svg2.append("g")
+                        .call(d3.axisLeft(y));
+
+                    // Lines
+                    svg2.selectAll("myline")
+                        .data(data)
+                        .enter()
+                        .append("line")
+                        .attr("x1", x(0))
+                        .attr("x2", x(0))
+                        .attr("y1", function (d) {
+                            return y(d.date);
+                        })
+                        .attr("y2", function (d) {
+                            return y(d.date);
+                        })
+                        .attr("stroke", "grey")
+
+                    // Circles -> start at X=0
+                    svg2.selectAll("mycircle")
+                        .data(data)
+                        .enter()
+                        .append("circle")
+                        .attr("cx", x(0))
+                        .attr("cy", function (d) {
+                            return y(d.date);
+                        })
+                        .attr("r", "7")
+                        .style("fill", "#69b3a2")
+                        .attr("stroke", "black");
+
+                    // Change the X coordinates of line and circle
+                    svg2.selectAll("circle")
+                        .transition()
+                        .duration(2000)
+                        .attr("cx", function (d) {
+                            return x(d.value);
+                        });
+
+                    svg2.selectAll("line")
+                        .transition()
+                        .duration(2000)
+                        .attr("x1", function (d) {
+                            return x(d.value);
+                        })
+
+                }
+            );
+        });
     });
 </script>
 <!--Graphing Script-->
@@ -477,7 +576,7 @@ Developers:
             }))
             .padding(1);
         svg.append("g")
-            .call(d3.axisLeft(y))
+            .call(d3.axisLeft(y));
 
         // Lines
         svg.selectAll("myline")
@@ -505,7 +604,7 @@ Developers:
             })
             .attr("r", "7")
             .style("fill", "#69b3a2")
-            .attr("stroke", "black")
+            .attr("stroke", "black");
 
         // Change the X coordinates of line and circle
         svg.selectAll("circle")
@@ -513,7 +612,7 @@ Developers:
             .duration(2000)
             .attr("cx", function (d) {
                 return x(d.Value);
-            })
+            });
 
         svg.selectAll("line")
             .transition()
@@ -524,6 +623,96 @@ Developers:
 
     })
 
+</script>
+<!--Graphing Script-->
+<script>
+    // set the dimensions and margins of the graph
+    var margin2 = {top: 10, right: 30, bottom: 40, left: 100},
+        width2 = document.getElementById("my_dataviz2").parentElement.clientWidth - margin.left - margin.right,
+        height2 = document.getElementById("my_dataviz2").parentElement.clientHeight - margin.top - margin.bottom;
+
+    // append the svg object to the body of the page
+    var svg2 = d3.select("#my_dataviz2")
+        .append("svg")
+        .attr("width", width2 + margin2.left + margin2.right)
+        .attr("height", height2 + margin2.top + margin2.bottom)
+        .append("g")
+        .attr("transform",
+            "translate(" + margin2.left + "," + margin2.top + ")");
+
+    // Parse the Data
+    d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/connectedscatter.csv", function (data) {
+
+        // sort data
+        data.sort(function (b, a) {
+            return a.value - b.value;
+        });
+
+        // Add X axis
+        var x = d3.scaleLinear()
+            .domain([0, 13000])
+            .range([0, width]);
+        svg2.append("g")
+            .attr("transform", "translate(0," + height + ")")
+            .call(d3.axisBottom(x))
+            .selectAll("text")
+            .attr("transform", "translate(-10,0)rotate(-45)")
+            .style("text-anchor", "end");
+
+        // Y axis
+        var y = d3.scaleBand()
+            .range([0, height])
+            .domain(data.map(function (d) {
+                return d.date;
+            }))
+            .padding(1);
+        svg2.append("g")
+            .call(d3.axisLeft(y));
+
+        // Lines
+        svg2.selectAll("myline")
+            .data(data)
+            .enter()
+            .append("line")
+            .attr("x1", x(0))
+            .attr("x2", x(0))
+            .attr("y1", function (d) {
+                return y(d.date);
+            })
+            .attr("y2", function (d) {
+                return y(d.date);
+            })
+            .attr("stroke", "grey")
+
+        // Circles -> start at X=0
+        svg2.selectAll("mycircle")
+            .data(data)
+            .enter()
+            .append("circle")
+            .attr("cx", x(0))
+            .attr("cy", function (d) {
+                return y(d.date);
+            })
+            .attr("r", "7")
+            .style("fill", "#69b3a2")
+            .attr("stroke", "black");
+
+        // Change the X coordinates of line and circle
+        svg2.selectAll("circle")
+            .transition()
+            .duration(2000)
+            .attr("cx", function (d) {
+                return x(d.value);
+            });
+
+        svg2.selectAll("line")
+            .transition()
+            .duration(2000)
+            .attr("x1", function (d) {
+                return x(d.value);
+            })
+
+    })
 </script>
 /body>
 < /html>

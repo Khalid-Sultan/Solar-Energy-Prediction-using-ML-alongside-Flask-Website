@@ -398,16 +398,18 @@ html {
 /* ==========================================================================================================
 										REVIEWS
    ========================================================================================================== */
-.fh5co-reviews-outer {
+.fh5co-reviews-outer, .fh5co-reviews2-outer {
   width: 100%;
-  height: 400px;
+    height: 550px;
   padding: 70px;
   margin-top: 100px;
 }
-.fh5co-reviews-outer .fh5co-reviews-inner {
+
+.fh5co-reviews-outer .fh5co-reviews-inner, .fh5co-reviews2-outer .fh5co-reviews2-inner {
   margin-top: 100px;
 }
-.fh5co-reviews-outer > h1 {
+
+.fh5co-reviews-outer > h1, .fh5co-reviews2-outer > h1 {
   color: #648cff;
   text-transform: uppercase;
   font-size: 30px;
@@ -415,16 +417,19 @@ html {
   margin-bottom: 10px;
   text-align: center;
 }
-.fh5co-reviews-outer > small {
+
+.fh5co-reviews-outer > small, .fh5co-reviews2-outer > small {
   text-align: center;
   display: block;
 }
-.fh5co-reviews-outer .testimonial-desc {
+
+.fh5co-reviews-outer .testimonial-desc, .fh5co-reviews2-outer .testimonial-desc {
   clear: both;
   padding-top: 30px;
   font-weight: 500;
 }
-.fh5co-reviews-outer .testimonial-2 {
+
+.fh5co-reviews-outer .testimonial-2, .fh5co-reviews2-outer .testimonial-2 {
   margin-left: 50px;
 }
 
@@ -851,11 +856,11 @@ html {
     height: 300px;
   }
 
-  .fh5co-reviews-outer {
-    height: auto;
+    .fh5co-reviews-outer, fh5co-reviews-outer {
+        height: 550px;
   }
 
-  .fh5co-reviews-outer .fh5co-reviews-inner {
+    .fh5co-reviews-outer .fh5co-reviews-inner, .fh5co-reviews2-outer .fh5co-reviews2-inner {
     margin-top: 50px;
   }
 
